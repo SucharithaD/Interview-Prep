@@ -1,0 +1,50 @@
+Monk's best friend Micro, who happen to be an awesome programmer, got him an integer matrix M of size N x N for his birthday. Monk is taking coding classes from Micro. They have just completed array inversions and Monk was successful in writing a program to count the number of inversions in an array. Now, Micro has asked Monk to find out the number of inversion in the matrix M. Number of inversions, in a matrix is defined as the number of unordered pairs of cells {(i,j),(p,q)} such that M[i][j] > M[p][q] and i<=p, j<=q Monk is facing a little trouble with this task and since you did not got him any birthday gift, you need to help him with this task.
+
+Solution 1:
+#include <iostream>
+using namespace std;
+int main() {
+	int num;
+	cin >> num;    //Reading input from STDIN
+	for (int t=0; t<num; t++)
+	{
+		int n;
+		cin >> n;
+		int a[n][n];
+		for(int i=0;i<n;i++)
+		{
+			for (int j=0;j<n;j++)
+			{
+				cin >> a[i][j];
+
+			}
+		}
+		int count = 0;
+    // The idea is here is to compare A[i][j] with all elements from A[p][q] until A[n-1][n-1] while i<=p, j<=q.
+    // 00 01 02    Compare 00 with 01,02,10,11,12,20,21,22
+    // 10 11 12    Compare 01 with 01,02,11,12,21,22
+    // 20 21 22 
+		for (int i=0; i<n; i++)
+		{
+			for(int j=0;j<n;j++)
+			{
+				for (int p=i; p<n; p++)
+				{
+					for(int q=j;q<n;q++)
+					{
+						if(a[i][j]>a[p][q])
+						{
+							count+=1;
+						}
+					}
+				}
+			}
+		}
+		cout << count <<endl;
+	}
+	return 0;// Writing output to STDOUT
+}
+//TODO: Can this be optimised?
+
+Time Complexity: n^4
+Space Complexity: TBD
